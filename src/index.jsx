@@ -1,13 +1,12 @@
 import { createRoot } from "react-dom/client";
 import "./index.scss";
+import { MainView } from "./components/main-view/main-view";
 
 
 //Main component
 const LeMoovieApp = () => {
     return (
-        <div className="le-moovie">
-            <div>Welcome to leMoovie!</div>
-        </div>
+        <MainView />
     );
 };
 

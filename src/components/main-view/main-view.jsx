@@ -9,7 +9,7 @@ export const MainView = () => {
         {
             id: 1,
             title: "Titanic",
-            image: "https://www.imdb.com/title/tt0120338/mediaviewer/rm2647458304/?ref_=tt_ov_i",
+            image: "https://www.tvguide.com/a/img/catalog/provider/1/2/1-9050537522.jpg",
             description: "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
             director: "James Cameron",
             genre: "Drama"
@@ -17,7 +17,7 @@ export const MainView = () => {
         {
             id: 2,
             title: "Encanto",
-            image: "https://www.imdb.com/title/tt2953050/mediaviewer/rm2541025281/?ref_=tt_ov_i",
+            image: "https://th.bing.com/th/id/OIP.2AzhGx6b55YrLLaYANkEGwHaIb?pid=ImgDet&rs=1",
             description: "A Colombian teenage girl has to face the frustration of being the only member of her family without magical powers.",
             director: "Jared Bush",
             genre: "Animation"
@@ -25,7 +25,7 @@ export const MainView = () => {
         {
             id: 3,
             title: "The Wolf of Wall Street",
-            image: "https://www.imdb.com/title/tt0993846/mediaviewer/rm2842940160/?ref_=tt_ov_i",
+            image: "https://th.bing.com/th/id/R.ca85b0a51be6a481b042841ec8c4f8f9?rik=GZfmvrYl7S2EOg&riu=http%3a%2f%2fwww.danielyeow.com%2fwp-content%2fuploads%2fTheWolfofWallStreet-poster.jpg&ehk=9pInwuqq%2bHihzJeOyUkpxRoiyWqy8djHUd9%2brEx%2bYjM%3d&risl=&pid=ImgRaw&r=0",
             description: "Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government.",
             director: "Martin Scorsese",
             genre: "Biography"

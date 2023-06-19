@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import react from "react";
 import { useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
@@ -31,9 +32,54 @@ export const MainView = () => {
             genre: "Biography"
         },
     ]);
+=======
+import React from "react";
+import { useState, useEffect } from "react";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
 
+export const MainView = () => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+>>>>>>> Stashed changes
+
+    const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
+<<<<<<< Updated upstream
+=======
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
+
+    //Fetching the API from Heroku
+    useEffect(() => {
+
+
+        fetch("https://le-moovie.herokuapp.com/movies")
+            .then((response) => response.json())
+            .then((data) => {
+                const movieFromApi = data.map((movie) => {
+                    return {
+                        //id: movie.id,
+                        Title: movie.Title,
+                        ImagePath: movie.ImagePath,
+                        Description: movie.Description,
+                        Genre: {
+                            Name: movie.Genre.Name
+                        },
+                        Director: {
+                            Name: movie.Director.Name
+                        },
+                        Featured: movie.Featured.toString()
+                    };
+                });
+                setMovies(movieFromApi);
+            });
+    }, []);
+
+>>>>>>> Stashed changes
     if (selectedMovie) {
         return (
             <MovieView
@@ -45,13 +91,41 @@ export const MainView = () => {
         )
     }
 
+<<<<<<< Updated upstream
+=======
+    if (!user) {
+        return (
+            <>
+                <LoginView
+                    onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                    }}
+                />
+                or
+                <SignupView />
+            </>
+        );
+    }
+
+    if (selectedMovie) {
+        return (
+            <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+        );
+    }
+>>>>>>> Stashed changes
 
     if (movies.length === 0) {
-        return <div>This list is empty.</div>;
+        return (
+            <div>
+                <div>This list is empty.</div>
+            </div>
+        );
     }
 
     return (
         <div>
+<<<<<<< Updated upstream
             {movies.map((movie) => {
                 return (
                     <MovieCard
@@ -63,6 +137,24 @@ export const MainView = () => {
                     />
                 );
             })}
+=======
+            {movies.map((movie) => (
+                <div>
+                    <React.StrictMode>
+                        <MovieCard
+                            key={movie.Title}
+                            movie={movie}
+                            onMovieClick={(newSelectedMovie) => {
+                                setSelectedMovie(newSelectedMovie);
+                            }}
+                        />
+                    </ React.StrictMode>
+                </div>
+            ))}
+            <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
+                Logout
+            </button>
+>>>>>>> Stashed changes
         </div>
     );
 }

@@ -28,7 +28,7 @@ export const MainView = () => {
             .then((data) => {
                 const movieFromApi = data.map((movie) => {
                     return {
-                        //id: movie.id,
+                        id: movie._id,
                         Title: movie.Title,
                         ImagePath: movie.ImagePath,
                         Description: movie.Description,
@@ -97,7 +97,7 @@ export const MainView = () => {
                 <div>
                     <React.StrictMode>
                         <MovieCard
-                            key={movie.Title}
+                            key={movie._id}
                             movie={movie}
                             onMovieClick={(newSelectedMovie) => {
                                 setSelectedMovie(newSelectedMovie);

@@ -27192,7 +27192,7 @@ const MainView = ()=>{
         }).then((response)=>response.json()).then((data)=>{
             const movieFromApi = data.map((movie)=>{
                 return {
-                    //id: movie.id,
+                    id: movie._id,
                     Title: movie.Title,
                     ImagePath: movie.ImagePath,
                     Description: movie.Description,
@@ -27272,7 +27272,7 @@ const MainView = ()=>{
                             onMovieClick: (newSelectedMovie)=>{
                                 setSelectedMovie(newSelectedMovie);
                             }
-                        }, movie.Title, false, {
+                        }, movie._id, false, {
                             fileName: "src/components/main-view/main-view.jsx",
                             lineNumber: 99,
                             columnNumber: 25
@@ -27677,14 +27677,15 @@ const LoginView = ({ onLoggedIn  })=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            username: username,
+            password: password
         };
-        fetch("https://le-moovie.herokuapp.com/login", {
-            method: "POST",
-            body: JSON.stringify(data)
-        }).then((response)=>{
-            if (response.ok) onLoggedIn(username);
+        fetch(`https://le-moovie.herokuapp.com/login?Username=${username}&Password=${password}`, {
+            method: "POST"
+        }).then((res)=>res.json()).then((response)=>{
+            console.log(response);
+            onLoggedIn(username, response.token);
+            if (response) ;
             else alert("Login failed, please try again.");
         });
     };
@@ -27702,13 +27703,13 @@ const LoginView = ({ onLoggedIn  })=>{
                         minLength: "4"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 34,
+                        lineNumber: 36,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 32,
+                lineNumber: 34,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -27722,13 +27723,13 @@ const LoginView = ({ onLoggedIn  })=>{
                         minLength: "6"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 45,
+                        lineNumber: 47,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 43,
+                lineNumber: 45,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -27736,13 +27737,13 @@ const LoginView = ({ onLoggedIn  })=>{
                 children: "Submit"
             }, void 0, false, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 54,
+                lineNumber: 56,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/login-view/login-view.jsx",
-        lineNumber: 31,
+        lineNumber: 33,
         columnNumber: 9
     }, undefined);
 };

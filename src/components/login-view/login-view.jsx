@@ -9,17 +9,18 @@ export const LoginView = ({ onLoggedIn }) => {
         event.preventDefault();
 
         const data = {
-            access: username,
-            secret: password
+            username: username,
+            password: password
         };
 
-        fetch("https://le-moovie.herokuapp.com/login", {
+        fetch(`https://le-moovie.herokuapp.com/login?Username=${username}&Password=${password}`, {
             method: "POST",
-            body: JSON.stringify(data)
-        })
+
+        }).then(res => res.json())
             .then((response) => {
-                if (response.ok) {
-                    onLoggedIn(username);
+                console.log(response)
+                onLoggedIn(username, response.token);
+                if (response) {
                 }
                 else {
                     alert("Login failed, please try again.");

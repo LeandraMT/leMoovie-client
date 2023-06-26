@@ -1,4 +1,8 @@
 import { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -33,52 +37,57 @@ export const SignupView = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input
+        <Form onSubmit={handleSubmit}>
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        placeholder="Enter email"
+                    />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridBirthday">
+                    <Form.Label>Birthday</Form.Label>
+                    <Form.Control
+                        type="date"
+                        value={birthday}
+                        onChange={(e) => setBirthday(e.target.value)}
+                        required
+                    />
+                </Form.Group>
+            </Row>
+
+            <Form.Group className="mb-3" controlId="formGridUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
                     type="text"
+                    placeholder="Set a username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     minLength="4"
                 />
-            </label>
+            </Form.Group>
 
-            <label>
-                Password:
-                <input
+            <Form.Group className="mb-3" controlId="formGridPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
                     type="password"
+                    placeholder="Set a password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     minLength="6"
                 />
-            </label>
+            </Form.Group>
 
-            <label>
-                Email:
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </label>
-
-            <label>
-                Birthday:
-                <input
-                    type="date"
-                    value={birthday}
-                    onChange={(e) => setBirthday(e.target.value)}
-                    required
-                />
-            </label>
-
-            <button type="submit">
+            <Button variant="dark" type="submit">
                 Submit
-            </button>
-        </form>
+            </Button>
+        </Form>
     );
 };

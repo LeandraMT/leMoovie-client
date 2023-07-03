@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 
-export const MovieView = ({ movies, user, setUser, token }) => {
+//Component
+import { MovieView } from "../movie-view/movie-view";
+
+//Bootstrap
+import { Row, Col, Container, Button } from "react-bootstrap";
+
+
+
+export const FavouriteMovies = ({ user, token, movies, setUser }) => {
+    console.log(movies);
     const { movieId } = useParams();
     const [isFavourite, setIsFavourite] = useState(false);
 
@@ -52,40 +63,23 @@ export const MovieView = ({ movies, user, setUser, token }) => {
     const movie = movies.find((m) => m.id === movieId);
 
     return (
-        <div>
-            <div>
-                <img src={movie.ImagePath} className="w-100" alt={movie.Title} />
-            </div>
-            <div>
-                <span>Title: </span>
-                <span>{movie.Title}</span>
-            </div>
-            <div>
-                <span>Description: </span>
-                <span>{movie.Description}</span>
-            </div>
-            <div>
-                <span>Director: </span>
-                <span>{movie.Director.Name}</span>
-            </div>
-            <div>
-                <span>Genre: </span>
-                <span>{movie.Genre.Name}</span>
-            </div>
-
-            {isFavourite ? (
-                <Button variant="danger" onClick={removeFavourite}>
-                    Remove movie from list
-                </Button>
-            ) : (
-                <Button variant="success" onClick={addFavourite}>
-                    Add movie to list
-                </Button>
-            )}
-
-            <Link to={`/`}>
-                <button className="back-button">Back</button>
-            </Link>
-        </div>
-    );
-};
+        <Container>
+            <Row>
+                <Col>
+                    <MovieView
+                        movie={movie}
+                    />
+                    {isFavourite ? (
+                        <Button variant="danger" onClick={removeFavourite}>
+                            Remove movie from list
+                        </Button>
+                    ) : (
+                        <Button variant="success" onClick={addFavourite}>
+                            Add movie to list
+                        </Button>
+                    )}
+                </Col>
+            </Row>
+        </Container>
+    )
+}

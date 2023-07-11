@@ -1,16 +1,31 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { API_URL } from '../../api_URL';
 
-export const MovieView = ({ movies, user, setUser, token }) => {
+//Bootstrap
+import { Button } from "react-bootstrap";
+
+export const MovieView = ({ movies, /*movie,*/ user, setUser, token }) => {
     const { movieId } = useParams();
     const [isFavourite, setIsFavourite] = useState(false);
 
+
+    //movie = movies.find((m) => m.id === movieId);
+
     useEffect(() => {
-        const isFavourited = user.FavoriteMovies.includes(movieId)
-        setIsFavourite(isFavourited)
-    }, []);
+        if (!user) {
+            return;
+        }
+
+        const isFavourited = user && user.FavouriteMovies && user.FavouriteMovies.includes(movieId);
+        setIsFavourite(isFavourited);
+    }, [user]);
+
 
     const removeFavourite = () => {
-        fetch(`https://le-moovie.herokuapp.com/users/${user.Username}/${movieId}`, {
+        fetch(`${API_URL}/users/${user.Username}/movies/${movieId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -19,32 +34,31 @@ export const MovieView = ({ movies, user, setUser, token }) => {
         })
             .then((response) => {
                 if (response.ok) {
-                    return response.json({ msg: `${movie.Title} has been removed from your list.` })
+                    return response.json();
                 }
             })
             .then((data) => {
                 setIsFavourite(false);
-                localStorage.setItem("user", JSON.stringify(data));
                 setUser(data);
             })
     }
 
     const addFavourite = () => {
-        fetch(`https://le-moovie.herokuapp.com/users/${user.Username}/${movieId}`, {
-            method: "PUT",
+        fetch(`${API_URL}/users/${user.Username}/movies/${movieId}`, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             }
         })
             .then((response) => {
+                console.log(response);
                 if (response.ok) {
-                    return response.json({ msg: `${movie.Title} has been added to your list.` })
+                    return response.json();
                 }
             })
             .then((data) => {
                 setIsFavourite(true);
-                localStorage.setItem("user", JSON.stringify(data));
                 setUser(data);
             })
     }
@@ -75,16 +89,21 @@ export const MovieView = ({ movies, user, setUser, token }) => {
 
             {isFavourite ? (
                 <Button variant="danger" onClick={removeFavourite}>
-                    Remove movie from list
+                    Remove from list
                 </Button>
             ) : (
-                <Button variant="success" onClick={addFavourite}>
-                    Add movie to list
-                </Button>
+                <Link to={`/users`}>
+                    <Button variant="success" onClick={addFavourite}>
+                        Add to list
+                    </Button>
+
+                </Link>
             )}
 
             <Link to={`/`}>
-                <button className="back-button">Back</button>
+                <Button variant="secondary" className="back-button">
+                    Back
+                </Button>
             </Link>
         </div>
     );

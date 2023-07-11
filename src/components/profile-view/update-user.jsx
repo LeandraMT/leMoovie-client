@@ -1,12 +1,49 @@
 import React from "react";
 import { useState } from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { API_URL } from "../../api_URL";
+
+//Bootstrap
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Form from "react-bootstrap/Form";
+import FormGroup from "react-bootstrap/FormGroup";
+import FormLabel from "react-bootstrap/FormLabel";
+import { FormControl } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import { ModalHeader } from "react-bootstrap";
 
 export const UpdateUser = ({ user, token, updatedUser }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [birthday, setBirthday] = useState("");
+
+    const [showModal, setShowModal] = useState(false);
+    const handleShowModal = () => setShowModal(true);
+    const handleCloseModal = () => setShowModal(false);
+
+    //Delete account
+    const deleteUser = () => {
+        fetch(`${API_URL}/users/${user.Username}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+                if (response.ok) {
+                    alert("Your account has been deleted.");
+                    onLoggedOut();
+                }
+                else {
+                    alert("Something went wrong...")
+                }
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    }
 
     const handleSubmitUpdate = (event) => {
         event.preventDefault();
@@ -19,7 +56,7 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
         };
 
         //Update the user info
-        fetch(`https://le-moovie.herokuapp.com/users/${user.Username}`, {
+        fetch(`${API_URL}/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
@@ -37,7 +74,7 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
             })
             .then((data) => {
                 localStorage.setItem("user", JSON.stringify(data));
-                updatedUser(user);
+                updatedUser(data);
             })
             .catch((err) => {
                 alert(err);
@@ -48,48 +85,75 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
         <>
             <Row>
                 <Form onSubmit={handleSubmitUpdate}>
-                    <Form.Group controlId="formUpdateUsername">
-                        <Form.Label>Username:</Form.Label>
-                        <Form.Control
+                    <FormGroup controlId="formUpdateUsername">
+                        <FormLabel>Username:</FormLabel>
+                        <FormControl
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
                             minLength="4"
+                            placeholder={user.Username}
                         />
-                    </Form.Group>
+                    </FormGroup>
 
-                    <Form.Group controlId="formUpdatePassword">
-                        <Form.Label>Password:</Form.Label>
-                        <Form.Control
+                    <FormGroup controlId="formUpdatePassword">
+                        <FormLabel>Password:</FormLabel>
+                        <FormControl
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             minLength="6"
                         />
-                    </Form.Group>
+                    </FormGroup>
 
-                    <Form.Group controlId="formUpdateEmail">
-                        <Form.Label>Email:</Form.Label>
-                        <Form.Control
+                    <FormGroup controlId="formUpdateEmail">
+                        <FormLabel>Email:</FormLabel>
+                        <FormControl
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            placeholder={user.Email}
                         />
-                    </Form.Group>
+                    </FormGroup>
 
-                    <Form.Group controlId="formUpdateBirthday">
-                        <Form.Label>Birthday:</Form.Label>
-                        <Form.Control
+                    <FormGroup controlId="formUpdateBirthday">
+                        <FormLabel>Birthday:</FormLabel>
+                        <FormControl
                             type="date"
                             value={birthday}
                             onChange={(e) => setBirthday(e.target.value)}
                             required
                         />
-                    </Form.Group>
-                    <Button variant="secondary" type="submit">Save</Button>
+                    </FormGroup>
+                    <Row>
+                        <Col>
+                            <Button variant="secondary" type="submit">
+                                Save
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button variant="danger" onClick={handleShowModal}>
+                                Delete account
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Modal show={showModal} onHide={handleCloseModal}>
+                        <ModalHeader closeButton>
+                            <Modal.Title>Delete account</Modal.Title>
+                        </ModalHeader>
+                        <Modal.Body>Are you sure you want to delete your account permanently?</Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="success" onClick={deleteUser}>
+                                Confirm
+                            </Button>
+                            <Button variant="secondary" onClick={handleCloseModal}>
+                                Cancel
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </Form>
             </Row>
         </>

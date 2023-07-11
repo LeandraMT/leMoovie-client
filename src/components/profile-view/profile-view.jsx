@@ -1,77 +1,56 @@
 import React from "react";
-
-//Components
-import { UpdateUser } from "./update-user";
-import { UserInfo } from "./user-info";
-import { FavouriteMovies } from "./favourite-movie";
-import { MovieView } from "../movie-view/movie-view";
+import { useState, useEffect } from "react";
 
 //Bootstrap
-import { Row, Col, Container, Card } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
-export const ProfileView = ({ user, token, movie, onLoggedOut, updatedUser, setUser }) => {
+//Components
+import { MovieCard } from "../movie-card/movie-card";
+import { UpdateUser } from "./update-user";
+import { MovieView } from "../movie-view/movie-view";
 
-    //Delete account
-    const deleteUser = () => {
-        fetch(`https://le-moovie.herokuapp.com/users/${user.Username}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((response) => {
-                if (response.ok) {
-                    alert("Your account has been deleted.");
-                    onLoggedOut();
-                }
-                else {
-                    alert("Something went wrong...")
-                }
-            })
-            .catch((err) => {
-                alert(err);
-            });
+export const ProfileView = ({ user, token, setUser, movies }) => {
+
+    const handleUpdateUser = (updatedUser) => {
+        setUser(updatedUser)
     }
 
     return (
         <>
-            <Container>
-                <Row>
-                    <h1>My Profile</h1>
-                </Row>
+            <h1>My Profile</h1>
+            <Row>
+                <Col>
+                    <div>Username: {user.Username}</div>
+                    <div>Email: {user.Email}</div>
+                </Col>
 
-                <Row>
-                    <Col>
-                        <UserInfo
-                            name={user.Username}
-                            email={user.Email}
-                        />
-                    </Col>
+                <Col>
+                    <UpdateUser
+                        user={user}
+                        token={token}
+                        updatedUser={handleUpdateUser}
+                    />
+                </Col>
+            </Row>
 
-                    <Col>
-                        <Card>
-                            <Card.Title>Update Your Profile:</Card.Title>
-                            <Card.Text>
-                                <UpdateUser
-                                    user={user}
-                                    token={token}
-                                />
-                            </Card.Text>
-                        </Card>
-                    </Col>
-                </Row>
+            <h3>Favourite Movies</h3>
+            <Row>
+                {user.FavouriteMovies ? (
+                    user.FavouriteMovies.map((movieId) => {
+                        const movie = movies.find((m) => m.id === movieId);
+                        return (
+                            <Col key={movie.id}>
+                                <MovieCard movie={movie} />
+                            </Col>
+                        );
+                    })
+                ) : (
+                    <div>No favorite movies</div>
+                )}
 
-                <Row>
-                    <Col>
-                        <FavouriteMovies
-                            user={user}
-                            token={token}
-                            movies={movie}
-                            setUser={setUser}
-                        />
-                    </Col>
-                </Row>
-            </Container>
+            </Row>
         </>
-    )
-}
+    );
+};

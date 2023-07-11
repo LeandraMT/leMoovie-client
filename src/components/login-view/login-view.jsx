@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-
 import { Link } from "react-router-dom";
+import { API_URL } from "../../api_URL";
 
+//Bootstrap
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -16,25 +17,26 @@ export const LoginView = ({ onLoggedIn }) => {
         event.preventDefault();
 
         const data = {
-            username: username,
-            password: password
-        };
+            Username: username,
+            Password: password
+        }
 
-        fetch(`https://le-moovie.herokuapp.com/login?Username=${username}&Password=${password}`, {
+        fetch(`${API_URL}/login?Username=${username}&Password=${password}`, {
             method: "POST",
 
         }).then(res => res.json())
-            .then((response) => {
-                console.log(response)
-                onLoggedIn(username, response.token)
-                if (response) {
-
+            .then((data) => {
+                if (data) {
+                    //localStorage.setItem("user", JSON.stringify(data));
+                    //localStorage.setItem("token", data.token);
+                    onLoggedIn(data.user, data.token);
                 }
                 else {
                     alert("Login failed, please try again.");
                 }
-            });
-    }
+            })
+    };
+
 
     return (
         <Form onSubmit={handleSubmit} className="login-form">

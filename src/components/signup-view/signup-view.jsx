@@ -1,8 +1,11 @@
 import { useState } from "react";
+
+//Bootstrap
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -37,57 +40,59 @@ export const SignupView = () => {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGridEmail">
-                    <Form.Label>Email</Form.Label>
+        <Container>
+            <Form onSubmit={handleSubmit} className="signup-view">
+                <Row className="mb-3">
+                    <Form.Group as={Col} controlId="formGridEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            placeholder="Enter email"
+                        />
+                    </Form.Group>
+
+                    <Form.Group as={Col} controlId="formGridBirthday">
+                        <Form.Label>Birthday</Form.Label>
+                        <Form.Control
+                            type="date"
+                            value={birthday}
+                            onChange={(e) => setBirthday(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+                </Row>
+
+                <Form.Group className="mb-3" controlId="formGridUsername">
+                    <Form.Label>Username</Form.Label>
                     <Form.Control
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        placeholder="Set a username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         required
-                        placeholder="Enter email"
+                        minLength="4"
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="formGridBirthday">
-                    <Form.Label>Birthday</Form.Label>
+                <Form.Group className="mb-3" controlId="formGridPassword">
+                    <Form.Label>Password</Form.Label>
                     <Form.Control
-                        type="date"
-                        value={birthday}
-                        onChange={(e) => setBirthday(e.target.value)}
+                        type="password"
+                        placeholder="Set a password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
+                        minLength="6"
                     />
                 </Form.Group>
-            </Row>
 
-            <Form.Group className="mb-3" controlId="formGridUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Set a username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    minLength="4"
-                />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formGridPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    placeholder="Set a password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    minLength="6"
-                />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+                <Button variant="outline-dark" type="submit" className="submit-btn">
+                    Submit
+                </Button>
+            </Form>
+        </Container>
     );
 };

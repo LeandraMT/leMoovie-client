@@ -1,1 +1,92 @@
+$body-bg: #222831;
+$body-color: #ffffff;
+
+$border-color: #e7eaf6;
+$button-color: #a070a1;
+$button-color_hover: #433751;
+
+:root {
+    --margin: 12%;
+    --padding: 8%;
+    --border-radius: 8px;
+    --headings: 24px;
+}
+
 @import '~bootstrap/scss/bootstrap.scss';
+
+//LOGIN VIEW
+#login-heading {
+    font-size: var(--headings);
+}
+
+.submit-btn {
+    background-color: $button-color;
+    margin-top: 5%;
+}
+
+.submit-btn:hover {
+    background-color: $button-color_hover;
+}
+
+.login-form {
+    margin: var(--margin);
+    padding: var(--padding);
+
+    border: 1px solid $button-color_hover;
+    border-radius: var(--border-radius);
+}
+
+.form-label {
+    font-size: 16px;
+}
+
+.signup-link {
+    text-decoration: none;
+    color: $body-color;
+    font-size: 16px;
+
+    display: flex;
+    justify-content: end;
+}
+
+
+
+//SIGNUP VIEW
+.signup-view {
+    margin: var(--margin);
+    padding: 6%;
+
+    border: 1px solid $button-color_hover;
+    border-radius: var(--border-radius);
+}
+
+
+
+//NAVIGATION VIEW
+#navbar-heading {
+    color: $body-color !important;
+    font-size: var(--headings);
+    letter-spacing: 0.2rem;
+}
+
+//heading animation
+#navbar-heading span {
+    transition: 0.5s ease-out;
+}
+
+#navbar-heading:hover span {
+    margin-left: 5px;
+    color: $button-color;
+    text-shadow: 0 0 10px $button-color, 0 0 20px $button-color;
+}
+
+//
+.navbar-links {
+    color: $body-color;
+    font-size: 16px;
+}
+
+.navbar-links:hover {
+    cursor: pointer;
+    color: $button-color;
+}

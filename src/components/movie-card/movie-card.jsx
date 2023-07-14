@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie }) => {
     return (
-        <Card style={{ width: '14rem' }} className="h-100">
-            <Card.Img variant="top" src={movie.ImagePath} />
-            <Card.Body>
+        <Card style={{ width: '18rem' }} className="h-100" id="movie-card">
+            <Card.Img variant="top" className="card-image" src={movie.ImagePath} />
+            <Card.Body className="card-body">
                 <Card.Title>{movie.Title}</Card.Title>
                 <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-                    <Button variant="link">
+                    <Button variant="link" className="submit-btn" id="movie-btn">
                         Open
                     </Button>
                 </Link>

@@ -1,8 +1,10 @@
+@import "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap";
 :root {
   --margin: 12%;
   --padding: 8%;
   --border-radius: 8px;
   --headings: 24px;
+  --font-size-text: 18px;
 }
 
 :root, [data-bs-theme="light"] {
@@ -102,7 +104,7 @@
   --bs-highlight-bg: #fff3cd;
   --bs-border-width: 1px;
   --bs-border-style: solid;
-  --bs-border-color: #e7eaf6;
+  --bs-border-color: #dee2e6;
   --bs-border-color-translucent: #0000002d;
   --bs-border-radius: .375rem;
   --bs-border-radius-sm: .25rem;
@@ -13193,6 +13195,10 @@ textarea.form-control-lg {
   }
 }
 
+body {
+  font-family: Playfair;
+}
+
 #login-heading {
   font-size: var(--headings);
 }
@@ -13214,13 +13220,13 @@ textarea.form-control-lg {
 }
 
 .form-label {
-  font-size: 16px;
+  font-size: var(--font-size-text);
 }
 
 .signup-link {
   color: #fff;
+  font-size: var(--font-size-text);
   justify-content: end;
-  font-size: 16px;
   text-decoration: none;
   display: flex;
 }
@@ -13250,12 +13256,75 @@ textarea.form-control-lg {
 
 .navbar-links {
   color: #fff;
-  font-size: 16px;
+  font-size: var(--font-size-text);
 }
 
 .navbar-links:hover {
   cursor: pointer;
   color: #a070a1;
+}
+
+#movie-card {
+  border: none;
+  padding: 5%;
+}
+
+.card-image {
+  max-width: 100%;
+}
+
+#movie-btn {
+  color: #fff;
+  text-decoration: none;
+}
+
+.search {
+  width: 200px;
+  margin-top: 20px;
+}
+
+.movie-view {
+  margin: var(--margin);
+}
+
+.headings {
+  text-transform: capitalize;
+}
+
+.back-button {
+  background-color: #a070a1;
+}
+
+.back-button:hover {
+  background-color: #433751;
+}
+
+.profile_heading {
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 4%;
+}
+
+.profile_username, .profile_email {
+  color: #a070a1;
+  font-size: var(--font-size-text);
+}
+
+.user_username, .user_email {
+  font-size: var(--font-size-text);
+}
+
+.save-btn, .del-btn {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.save-btn:hover {
+  color: #433751;
+}
+
+.modal-text {
+  font-size: var(--font-size-text);
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */

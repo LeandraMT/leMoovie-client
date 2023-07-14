@@ -190,6 +190,7 @@ export const MainView = () => {
                                                 value={filter}
                                                 onChange={(e) => setFilter(e.target.value)}
                                                 placeholder="Search movie..."
+                                                className="search"
                                             />
                                         </Row>
                                         {movies.length === 0 ? (

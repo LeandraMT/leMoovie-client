@@ -1,18 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+
 $body-bg: #222831;
 $body-color: #ffffff;
 
-$border-color: #e7eaf6;
 $button-color: #a070a1;
 $button-color_hover: #433751;
+$grey: #606470;
 
 :root {
     --margin: 12%;
     --padding: 8%;
     --border-radius: 8px;
     --headings: 24px;
+    --font-size-text: 18px;
 }
 
 @import '~bootstrap/scss/bootstrap.scss';
+
+body {
+    font-family: 'Playfair';
+}
 
 //LOGIN VIEW
 #login-heading {
@@ -37,13 +44,13 @@ $button-color_hover: #433751;
 }
 
 .form-label {
-    font-size: 16px;
+    font-size: var(--font-size-text);
 }
 
 .signup-link {
     text-decoration: none;
     color: $body-color;
-    font-size: 16px;
+    font-size: var(--font-size-text);
 
     display: flex;
     justify-content: end;
@@ -80,13 +87,90 @@ $button-color_hover: #433751;
     text-shadow: 0 0 10px $button-color, 0 0 20px $button-color;
 }
 
-//
 .navbar-links {
     color: $body-color;
-    font-size: 16px;
+    font-size: var(--font-size-text);
 }
 
 .navbar-links:hover {
     cursor: pointer;
     color: $button-color;
+}
+
+
+
+//MOVIE CARD VIEW
+#movie-card {
+    border: none;
+    padding: 5%;
+}
+
+.card-image {
+    max-width: 100%;
+}
+
+#movie-btn {
+    text-decoration: none;
+    color: $body-color;
+}
+
+
+
+//MAIN VIEW
+.search {
+    width: 200px;
+    margin-top: 20px;
+}
+
+
+
+//MOVIE VIEW
+.movie-view {
+    margin: var(--margin);
+}
+
+.headings {
+    text-transform: capitalize;
+}
+
+.back-button {
+    background-color: $button-color;
+}
+
+.back-button:hover {
+    background-color: $button-color_hover;
+}
+
+
+
+//PROFILE VIEW
+.profile_heading {
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 4%;
+}
+
+.profile_username,
+.profile_email {
+    color: $button-color;
+    font-size: var(--font-size-text);
+}
+
+.user_username,
+.user_email {
+    font-size: var(--font-size-text);
+}
+
+.save-btn,
+.del-btn {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.save-btn:hover {
+    color: $button-color_hover;
+}
+
+.modal-text {
+    font-size: var(--font-size-text);
 }

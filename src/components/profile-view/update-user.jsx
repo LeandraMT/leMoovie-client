@@ -83,8 +83,8 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
 
     return (
         <>
-            <Row>
-                <Form onSubmit={handleSubmitUpdate}>
+            <Row md={7}>
+                <Form onSubmit={handleSubmitUpdate} sm={{ offset: 2 }} md={{ offset: 4 }}>
                     <FormGroup controlId="formUpdateUsername">
                         <FormLabel>Username:</FormLabel>
                         <FormControl
@@ -130,12 +130,12 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
                     </FormGroup>
                     <Row>
                         <Col>
-                            <Button variant="secondary" type="submit">
+                            <Button variant="light" type="submit" className="save-btn">
                                 Save
                             </Button>
                         </Col>
                         <Col>
-                            <Button variant="danger" onClick={handleShowModal}>
+                            <Button variant="danger" onClick={handleShowModal} className="del-btn">
                                 Delete account
                             </Button>
                         </Col>
@@ -144,7 +144,7 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
                         <ModalHeader closeButton>
                             <Modal.Title>Delete account</Modal.Title>
                         </ModalHeader>
-                        <Modal.Body>Are you sure you want to delete your account permanently?</Modal.Body>
+                        <Modal.Body className="modal-text">Are you sure you want to delete your account permanently?</Modal.Body>
                         <Modal.Footer>
                             <Button variant="success" onClick={deleteUser}>
                                 Confirm

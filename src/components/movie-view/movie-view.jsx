@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 import { API_URL } from '../../api_URL';
 
 //Bootstrap
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-export const MovieView = ({ movies, /*movie,*/ user, setUser, token }) => {
+export const MovieView = ({ movies, user, setUser, token }) => {
     const { movieId } = useParams();
     const [isFavourite, setIsFavourite] = useState(false);
-
-
-    //movie = movies.find((m) => m.id === movieId);
 
     useEffect(() => {
         if (!user) {
@@ -66,45 +65,49 @@ export const MovieView = ({ movies, /*movie,*/ user, setUser, token }) => {
     const movie = movies.find((m) => m.id === movieId);
 
     return (
-        <div>
+        <Row className="movie-view">
             <div>
-                <img src={movie.ImagePath} className="w-100" alt={movie.Title} />
-            </div>
-            <div>
-                <span>Title: </span>
-                <span>{movie.Title}</span>
-            </div>
-            <div>
-                <span>Description: </span>
-                <span>{movie.Description}</span>
-            </div>
-            <div>
-                <span>Director: </span>
-                <span>{movie.Director.Name}</span>
-            </div>
-            <div>
-                <span>Genre: </span>
-                <span>{movie.Genre.Name}</span>
-            </div>
+                <div>
+                    <img src={movie.ImagePath} className="w-100 mb-4" alt={movie.Title} />
+                </div>
+                <div className="mb-2">
+                    <span>Title: </span>
+                    <span>{movie.Title}</span>
+                </div>
+                <div className="mb-2">
+                    <span>Description: </span>
+                    <span>{movie.Description}</span>
+                </div>
+                <div className="mb-2">
+                    <span>Director: </span>
+                    <span>{movie.Director.Name}</span>
+                </div>
+                <div className="mb-2">
+                    <span>Genre: </span>
+                    <span>{movie.Genre.Name}</span>
+                </div>
 
-            {isFavourite ? (
-                <Button variant="danger" onClick={removeFavourite}>
-                    Remove from list
-                </Button>
-            ) : (
-                <Link to={`/users`}>
-                    <Button variant="success" onClick={addFavourite}>
-                        Add to list
+                {isFavourite ? (
+                    <Button variant="danger" size="sm" onClick={removeFavourite}>
+                        Remove from list
                     </Button>
+                ) : (
+                    <Link to={`/users`}>
+                        <Button variant="success" size="sm" onClick={addFavourite}>
+                            Add to list
+                        </Button>
 
+                    </Link>
+
+                )}
+                <br></br>
+                <br></br>
+                <Link to={`/`}>
+                    <Button variant="secondary" size="sm" className="back-button">
+                        Back
+                    </Button>
                 </Link>
-            )}
-
-            <Link to={`/`}>
-                <Button variant="secondary" className="back-button">
-                    Back
-                </Button>
-            </Link>
-        </div>
+            </div>
+        </Row>
     );
 };

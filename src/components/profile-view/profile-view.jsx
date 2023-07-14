@@ -19,11 +19,19 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
 
     return (
         <>
-            <h1>My Profile</h1>
+            <div className="profile_heading">
+                <h3>My Profile</h3>
+            </div>
             <Row>
-                <Col>
-                    <div>Username: {user.Username}</div>
-                    <div>Email: {user.Email}</div>
+                <Col className="mt-4">
+                    <div>
+                        <span className="profile_username">Username:  </span>
+                        <span className="user_username">{user.Username}</span>
+                    </div>
+                    <div>
+                        <span className="profile_email">Email:  </span>
+                        <span className="user_email">{user.Email}</span>
+                    </div>
                 </Col>
 
                 <Col>
